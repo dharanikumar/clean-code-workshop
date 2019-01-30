@@ -37,18 +37,7 @@ public class Customer {
 
 
   public String htmlStatement(){
-    StringBuilder result = new StringBuilder("<h1>Rental Record for <b>" + getName() + "</b></h1><br/>");
-
-    for (Rental each : rentals) {
-      //show figures for this rental
-      result.append(" ").append(each.getMovie().getTitle()).append(" ").append(String.valueOf(each.amount())).append("<br/>");
-
-    }
-
-    result.append("Amount owed is <b>").append(String.valueOf(totalAmount())).append("</b><br/>");
-    result.append("You earned <b>").append(String.valueOf(frequentRenterPoints())).append("</b> frequent renter points");
-
-    return result.toString();
+    return new TextStatement().display(this);
 
   }
 
@@ -70,5 +59,21 @@ public class Customer {
   }
 
 
+  private class TextStatement {
+    public String display(Customer customer) {
+      StringBuilder result = new StringBuilder("<h1>Rental Record for <b>" + customer.getName() + "</b></h1><br/>");
+
+      for (Rental each : customer.rentals) {
+        //show figures for this rental
+        result.append(" ").append(each.getMovie().getTitle()).append(" ").append(String.valueOf(each.amount())).append("<br/>");
+
+      }
+
+      result.append("Amount owed is <b>").append(String.valueOf(customer.totalAmount())).append("</b><br/>");
+      result.append("You earned <b>").append(String.valueOf(customer.frequentRenterPoints())).append("</b> frequent renter points");
+
+      return result.toString();
+    }
+  }
 }
 
