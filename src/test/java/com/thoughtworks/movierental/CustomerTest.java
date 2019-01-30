@@ -22,6 +22,7 @@ public class CustomerTest {
         customerBob.addRental(sampleRent);
         customerBob.addRental(testRent);
         testCustomer(customerBob);
+        testCustomerHtmlFormat(customerBob);
     }
 
     //Testing Rental details
@@ -45,6 +46,12 @@ public class CustomerTest {
                 "\tTest Movie\t18.0\n" +
                 "Amount owed is 23.0\n" +
                 "You earned 3 frequent renter points",customer.statement());
+    }
+
+    //Testing customer details Html format
+    private void testCustomerHtmlFormat(Customer customer){
+        assert (customer.getName().length() > 0):"Customer doesn't have name";
+        Assert.assertEquals("<html><h1>Rental Record for <b>Bob</b></h1><br><pre>Sample Movie</pre><pre>5.0</pre><br><pre>Test Movie</pre><pre>18.0</pre><br>Amount owed is <b>23.0</b><br>You earned <b>3</b> frequent renter points<br></html>",customer.htmlStatement());
     }
 
 }

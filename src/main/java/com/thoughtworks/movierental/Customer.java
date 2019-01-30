@@ -21,21 +21,35 @@ public class Customer {
 
   public String statement() {
 
-
-    String result = "Rental Record for " + getName() + "\n";
+    StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
 
     for (Rental each : rentals) {
       //show figures for this rental
-      result += "\t" + each.getMovie().getTitle() + "\t" +
-          String.valueOf(each.amount()) + "\n";
+      result.append("\t").append(each.getMovie().getTitle()).append("\t").append(String.valueOf(each.amount())).append("\n");
 
     }
 
     //add footer lines result
-    result += "Amount owed is " + String.valueOf(totalAmount()) + "\n";
-    result += "You earned " + String.valueOf(frequentRenterPoints())
-        + " frequent renter points";
-    return result;
+    result.append("Amount owed is ").append(String.valueOf(totalAmount())).append("\n");
+    result.append("You earned ").append(String.valueOf(frequentRenterPoints())).append(" frequent renter points");
+    return result.toString();
+  }
+
+
+  public String htmlStatement(){
+    StringBuilder result = new StringBuilder("<html><h1>Rental Record for <b>" + getName() + "</b></h1><br>");
+
+    for (Rental each : rentals) {
+      //show figures for this rental
+      result.append("<pre>").append(each.getMovie().getTitle()).append("</pre><pre>").append(String.valueOf(each.amount())).append("</pre><br>");
+
+    }
+
+    result.append("Amount owed is <b>").append(String.valueOf(totalAmount())).append("</b><br>");
+    result.append("You earned <b>").append(String.valueOf(frequentRenterPoints())).append("</b> frequent renter points<br></html>");
+
+    return result.toString();
+
   }
 
   private int frequentRenterPoints() {
