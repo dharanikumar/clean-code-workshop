@@ -1,31 +1,24 @@
 package com.thoughtworks.movierental;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class Rentals {
-    List<Rental> rentals;
+public class Rentals extends ArrayList<Rental> {
 
-    public Rentals(List<Rental> rentalsObj){
-        rentals =rentalsObj;
+
+    double totalAmount() {
+      double totalAmount = 0;
+      for (Rental each : this) {
+        totalAmount += each.amount();
+      }
+      return totalAmount;
     }
 
-    public int frequentRenterPoints() {
-        int frequentRenterPoints = 0;
-        for (Rental each : rentals) {
-            //add frequent renter points
-            frequentRenterPoints += each.getFrequentRenterPoints();
-        }
-        return frequentRenterPoints;
+    int frequentRenterPoints() {
+      int frequentRenterPoints = 0;
+      for (Rental each : this) {
+        //add frequent renter points
+        frequentRenterPoints += each.getFrequentRenterPoints();
+      }
+      return frequentRenterPoints;
     }
-
-    public double totalAmount() {
-        double totalAmount = 0;
-        for (Rental each : rentals) {
-            totalAmount += each.amount();
-        }
-        return totalAmount;
-    }
-
-
-
 }
